@@ -1,0 +1,71 @@
+- name: SG Rules
+  sg:
+  - expense-dev-db
+  - expense-dev-backend
+  - expense-dev-frontend
+  - expense-dev-bastion
+  - expense-dev-ansible
+  - expense-dev-openvpn
+  - expense-dev-backend-alb
+  db:
+  - name: db_backend
+    desc: db accepting connections from backend
+    source: backend
+    port: 3306
+  - name: db_bastion
+    desc: db accepting connections from bastion
+    source: bastion
+    port: 3306
+  backend:
+  - name: backend_frontend
+    desc: backend accepting connections from frontend
+    source: frontend
+    port: 8080
+  - name: backend_bastion
+    desc: backend accepting connections from bastion
+    source: bastion
+    port: 22
+  - name: backend_ansible
+    desc: backend accepting connections from ansible
+    source: ansible
+    port: 22
+  frontend:
+  - name: frontend_public
+    desc: frontend accepting connections from public
+    source: public
+    port: 80
+  - name: frontend_bastion
+    desc: frontend accepting connections from bastion
+    source: bastion
+    port: 22
+  - name: frontend_ansible
+    desc: frontend accepting connections from ansible
+    source: ansible
+    port: 22
+  bastion:
+  - name: bastion_public
+    desc: bastion accepting connections from public
+    source: public #idealy your home IP address/32
+    port: 22
+  ansible:
+  - name: ansible_public
+    desc: ansible accepting connections from public
+    source: public #idealy your home IP address/32
+    port: 22
+  openvpn:
+  - name: openvpn_public
+    desc: openvpn accepting connections from public
+    port: "22,943,443"
+    source: public
+  - name: backend_alb_openvpn
+    desc: backend alb accepting connections from openvpn
+    port: 80
+    source: openvpn
+  - name: db_openvpn
+    desc: db accepting connections from openvpn
+    port: 3306
+    source: openvpn
+  - name: backend_openvpn
+    desc: backend accepting connections from openvpn
+    port: 22
+    source: openvpn
