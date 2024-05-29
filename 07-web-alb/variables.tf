@@ -11,6 +11,10 @@ variable "common_tags" {
     Project = "expense"
     Environment = "dev"
     Terraform = "true"
-    Component = "bastion"
+    Component = "web-alb"
   }
+}
+
+variable "zone_name" {
+  default = "daws78s.online"
 }

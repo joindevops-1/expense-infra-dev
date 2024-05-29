@@ -73,7 +73,7 @@ module "records" {
   
   records = [
     {
-      name    = "db"
+      name    = "db-${var.environment}"
       type    = "CNAME"
       allow_overwrite = true
       ttl = 1

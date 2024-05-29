@@ -18,7 +18,7 @@ variable "db_sg_description" {
   default = "SG for DB MySQL Instances"
 }
 
-variable "ingress_rules" {
+variable "vpn_sg_rules" {
   default = [
     {
       from_port   = 22

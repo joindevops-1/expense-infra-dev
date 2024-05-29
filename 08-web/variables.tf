@@ -7,12 +7,11 @@ variable "environment" {
 }
 
 variable "common_tags" {
-  default = {
-    Project = "expense"
-    Environment = "dev"
-    Terraform = "true"
-    Component = "db"
-  }
+    default = {
+        Project = "expense"
+        Environment = "dev"
+        Terraform = "true"
+    }
 }
 
 variable "zone_name" {
