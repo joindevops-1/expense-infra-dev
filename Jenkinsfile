@@ -36,15 +36,16 @@ pipeline {
             }
         }
         stage('Deploy') {
-            input {
-                message "Should we continue?"
-                ok "Yes, we should."
-            }
             when {
                 expression{
                     params.action == 'Apply'
                 }
             }
+            input {
+                message "Should we continue?"
+                ok "Yes, we should."
+            }
+            
             steps {
                 sh """
                 cd 01-vpc
@@ -53,15 +54,16 @@ pipeline {
             }
         }
         stage('Destroy') {
-            input {
-                message "Should we continue?"
-                ok "Yes, we should."
-            }
             when {
                 expression{
                     params.action == 'Destroy'
                 }
             }
+            input {
+                message "Should we continue?"
+                ok "Yes, we should."
+            }
+            
             steps {
                 sh """
                 cd 01-vpc
