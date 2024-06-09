@@ -8,9 +8,15 @@ pipeline {
 
         ansiColor('xterm')
     }
+    parameters(
+        choice(name: 'action', choices: ['Apply', 'Destroy'], description: 'Pick something')
+    )
   
     stages {
         stage('Init') {
+            when {
+                params.action == 'Apply'
+            }
             steps {
                 sh """
                     cd 01-vpc
@@ -19,6 +25,9 @@ pipeline {
             }
         }
         stage('Plan') {
+            when {
+                params.action == 'Apply'
+            }
             steps {
                 sh """
                     cd 01-vpc
@@ -30,6 +39,24 @@ pipeline {
             input {
                 message "Should we continue?"
                 ok "Yes, we should."
+            }
+            when {
+                params.action == 'Apply'
+            }
+            steps {
+                sh """
+                cd 01-vpc
+                terraform apply -auto-approve
+                """
+            }
+        }
+        stage('Destroy') {
+            input {
+                message "Should we continue?"
+                ok "Yes, we should."
+            }
+            when {
+                params.action == 'Destroy'
             }
             steps {
                 sh """
