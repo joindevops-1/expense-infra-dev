@@ -15,7 +15,9 @@ pipeline {
     stages {
         stage('Init') {
             when {
-                params.action == 'Apply'
+                expression{
+                    params.action == 'Apply'
+                }
             }
             steps {
                 sh """
@@ -26,7 +28,9 @@ pipeline {
         }
         stage('Plan') {
             when {
-                params.action == 'Apply'
+                expression{
+                    params.action == 'Apply'
+                }
             }
             steps {
                 sh """
@@ -41,7 +45,9 @@ pipeline {
                 ok "Yes, we should."
             }
             when {
-                params.action == 'Apply'
+                expression{
+                    params.action == 'Apply'
+                }
             }
             steps {
                 sh """
@@ -56,7 +62,9 @@ pipeline {
                 ok "Yes, we should."
             }
             when {
-                params.action == 'Destroy'
+                expression{
+                    params.action == 'Destroy'
+                }
             }
             steps {
                 sh """
